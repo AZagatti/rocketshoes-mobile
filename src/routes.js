@@ -1,14 +1,20 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Main from './pages/Main';
-import Cart from './pages/Cart';
+import Main from './screens/Main';
+import Cart from './screens/Cart';
+import Header from './components/Header';
 
 const { Navigator, Screen } = createStackNavigator();
 
 export default function src() {
   return (
-    <Navigator>
+    <Navigator
+      headerMode="screen"
+      screenOptions={{
+        header: props => <Header {...props} />,
+      }}
+    >
       <Screen name="Main" component={Main} />
       <Screen name="Cart" component={Cart} />
     </Navigator>

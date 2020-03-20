@@ -10,6 +10,8 @@ function* addToCart({ id }) {
     state.cart.find(p => p.id === id)
   );
 
+  console.tron.log(productExists);
+
   const stock = yield call(api.get, `stock/${id}`);
 
   const stockAmount = stock.data.amount;

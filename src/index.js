@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
+import FlashMessage from 'react-native-flash-message';
 
 import './config/ReactotronConfig';
 
@@ -12,6 +13,7 @@ const App = () => {
     <NavigationContainer>
       <StatusBar barStyle="light-content" />
       <Routes />
+      <FlashMessage position="top" autoHide duration={3000} />
     </NavigationContainer>
   );
 };

@@ -6,7 +6,7 @@ import colors from '../../styles/colors';
 
 const { width, height } = Dimensions.get('window');
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
   background-color: ${colors.dark};
 `;
@@ -75,7 +75,9 @@ export const SubIcon = styled(Icon).attrs({
   size: height * 0.03,
 })``;
 
-export const ProductAmount = styled.Text`
+export const ProductAmount = styled.TextInput.attrs({
+  readonly: true,
+})`
   padding: ${width * 0.01}px ${width * 0.05}px;
   background-color: #fff;
   margin: 0 ${width * 0.006}px;

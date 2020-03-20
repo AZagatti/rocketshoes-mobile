@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import {
   Container,
@@ -22,35 +25,52 @@ import {
   FinishButtonText,
 } from './styles';
 
-export default function Cart() {
+import { formatPrice } from '../../util/format';
+import * as CartActions from '../../store/modules/cart/actions';
+
+function Cart({ cart, total, removeFromCart, updateAmountRequest }) {
+  function increment(product) {
+    updateAmountRequest(product.id, product.amount + 1);
+  }
+
+  function decrement(product) {
+    updateAmountRequest(product.id, product.amount - 1);
+  }
+
   return (
     <Container>
       <CartContainer>
-        <ProductContainer>
-          <Product>
-            <ProductImage
-              source={{
-                uri:
-                  'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg',
-              }}
-            />
-            <ProductInfo>
-              <ProductName>Tênis de Caminhada Leve Confortável</ProductName>
-              <ProductPrice>R$179,90</ProductPrice>
-            </ProductInfo>
-            <DeleteIcon />
-          </Product>
-          <ProductOptions>
-            <Amount>
-              <SubIcon />
-              <ProductAmount>3</ProductAmount>
-              <AddIcon />
-            </Amount>
-            <ProductTotalPrice>R$539,70</ProductTotalPrice>
-          </ProductOptions>
-        </ProductContainer>
+        {cart.length ? (
+          cart.map(product => (
+            <ProductContainer key={String(product.id)}>
+              <Product>
+                <ProductImage
+                  source={{
+                    uri: product.image,
+                  }}
+                />
+                <ProductInfo>
+                  <ProductName>{product.title}</ProductName>
+                  <ProductPrice>{product.priceFormatted}</ProductPrice>
+                </ProductInfo>
+                <DeleteIcon onPress={() => removeFromCart(product.id)} />
+              </Product>
+              <ProductOptions>
+                <Amount>
+                  <SubIcon onPress={() => decrement(product)} />
+                  <ProductAmount value={String(product.amount)} />
+                  <AddIcon onPress={() => increment(product)} />
+                </Amount>
+                <ProductTotalPrice>{product.subtotal}</ProductTotalPrice>
+              </ProductOptions>
+            </ProductContainer>
+          ))
+        ) : (
+          <TotalPrice>Carrinho vazio</TotalPrice>
+        )}
+
         <TotalText>TOTAL</TotalText>
-        <TotalPrice>R$ 1619,10</TotalPrice>
+        <TotalPrice>{total}</TotalPrice>
 
         <FinishButton>
           <FinishButtonText>FINALIZAR PEDIDO</FinishButtonText>
@@ -59,3 +79,27 @@ export default function Cart() {
     </Container>
   );
 }
+
+Cart.propTypes = {
+  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
+  total: PropTypes.string.isRequired,
+  removeFromCart: PropTypes.func.isRequired,
+  updateAmountRequest: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  cart: state.cart.map(product => ({
+    ...product,
+    subtotal: formatPrice(product.price * product.amount),
+  })),
+  total: formatPrice(
+    state.cart.reduce((total, product) => {
+      return total + product.price * product.amount;
+    }, 0)
+  ),
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(CartActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import PropTypes from 'prop-types';
 
@@ -11,7 +12,7 @@ import {
   ItemCount,
 } from './styles';
 
-export default function Header({ navigation }) {
+function Header({ navigation, cartSize }) {
   return (
     <SafeContainer>
       <Container>
@@ -20,7 +21,7 @@ export default function Header({ navigation }) {
         </TouchableOpacity>
         <BasketContainer onPress={() => navigation.navigate('Cart')}>
           <BasketIcon />
-          <ItemCount>1</ItemCount>
+          <ItemCount>{cartSize}</ItemCount>
         </BasketContainer>
       </Container>
     </SafeContainer>
@@ -35,4 +36,11 @@ Header.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }),
+  cartSize: PropTypes.number.isRequired,
 };
+
+const mapStateToProps = state => ({
+  cartSize: state.cart.length,
+});
+
+export default connect(mapStateToProps)(Header);

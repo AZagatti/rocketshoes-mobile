@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { showMessage } from 'react-native-flash-message';
 
 import {
   Container,
@@ -35,14 +36,21 @@ class Main extends Component {
   };
 
   async componentDidMount() {
-    const response = await api.get('/products');
+    try {
+      const response = await api.get('/products');
 
-    const data = response.data.map(product => ({
-      ...product,
-      priceFormatted: formatPrice(product.price),
-    }));
+      const data = response.data.map(product => ({
+        ...product,
+        priceFormatted: formatPrice(product.price),
+      }));
 
-    this.setState({ products: data });
+      this.setState({ products: data });
+    } catch (err) {
+      showMessage({
+        message: 'Não foi possível carregar os produtos',
+        type: 'danger',
+      });
+    }
   }
 
   handleAddProduct = id => {
@@ -57,34 +65,38 @@ class Main extends Component {
 
     return (
       <Container>
-        <List
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={products}
-          keyExtractor={product => String(product.id)}
-          renderItem={({ item }) => (
-            <Wrapper>
-              <Product>
-                <ProductImage
-                  source={{
-                    uri: item.image,
-                  }}
-                />
-                <ProductInfo>
-                  <ProductName>{item.title}</ProductName>
-                  <ProductPrice>{item.priceFormatted}</ProductPrice>
-                </ProductInfo>
-                <AddButton onPress={() => this.handleAddProduct(item.id)}>
-                  <CartCount>
-                    <CartIcon />
-                    <CartCountText>{amount[item.id] || 0}</CartCountText>
-                  </CartCount>
-                  <AddButtonText>ADICIONAR</AddButtonText>
-                </AddButton>
-              </Product>
-            </Wrapper>
-          )}
-        />
+        {products.length ? (
+          <List
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={products}
+            keyExtractor={product => String(product.id)}
+            renderItem={({ item }) => (
+              <Wrapper>
+                <Product>
+                  <ProductImage
+                    source={{
+                      uri: item.image,
+                    }}
+                  />
+                  <ProductInfo>
+                    <ProductName>{item.title}</ProductName>
+                    <ProductPrice>{item.priceFormatted}</ProductPrice>
+                  </ProductInfo>
+                  <AddButton onPress={() => this.handleAddProduct(item.id)}>
+                    <CartCount>
+                      <CartIcon />
+                      <CartCountText>{amount[item.id] || 0}</CartCountText>
+                    </CartCount>
+                    <AddButtonText>ADICIONAR</AddButtonText>
+                  </AddButton>
+                </Product>
+              </Wrapper>
+            )}
+          />
+        ) : (
+          <AddButtonText>Nenhum produto encontrado</AddButtonText>
+        )}
       </Container>
     );
   }

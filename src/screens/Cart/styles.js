@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import colors from '../../styles/colors';
@@ -19,16 +19,19 @@ export const CartContainer = styled.View`
   padding: ${height * 0.025}px;
 `;
 
-export const ProductContainer = styled.View``;
+export const ProductContainer = styled.View`
+  width: ${Platform.OS === 'android' && '100%'};
+`;
 
 export const Product = styled.View`
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 `;
 
 export const ProductImage = styled.Image`
   height: ${height * 0.1}px;
-  width: ${width * 0.25}px;
+  width: ${Platform.OS === 'ios' ? width * 0.25 : width * 0.2}px;
 `;
 
 export const ProductInfo = styled.View`
@@ -51,7 +54,7 @@ export const ProductPrice = styled.Text`
 export const DeleteIcon = styled(Icon).attrs({
   name: 'delete-forever',
   color: colors.primary,
-  size: height * 0.035,
+  size: Platform.OS === 'ios' ? height * 0.03 : height * 0.04,
 })``;
 
 export const ProductOptions = styled.View`
@@ -72,13 +75,14 @@ export const Amount = styled.View`
 export const SubIcon = styled(Icon).attrs({
   name: 'remove-circle-outline',
   color: colors.primary,
-  size: height * 0.03,
+  size: Platform.OS === 'ios' ? height * 0.03 : height * 0.04,
 })``;
 
 export const ProductAmount = styled.TextInput.attrs({
   readonly: true,
 })`
-  padding: ${width * 0.01}px ${width * 0.05}px;
+  padding: ${Platform.OS === 'ios' ? width * 0.01 : width * 0.005}px
+    ${Platform.OS === 'ios' ? width * 0.05 : width * 0.04}px;
   background-color: #fff;
   margin: 0 ${width * 0.006}px;
   border: 1px solid #ccc;
@@ -88,7 +92,7 @@ export const ProductAmount = styled.TextInput.attrs({
 export const AddIcon = styled(Icon).attrs({
   name: 'add-circle-outline',
   color: colors.primary,
-  size: height * 0.03,
+  size: Platform.OS === 'ios' ? height * 0.03 : height * 0.04,
 })``;
 
 export const ProductTotalPrice = styled.Text`

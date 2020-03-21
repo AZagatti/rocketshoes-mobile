@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { darken } from 'polished';
@@ -22,7 +22,7 @@ export const Wrapper = styled.View`
 `;
 
 export const Product = styled.View`
-  flex: 0.65;
+  flex: ${Platform.OS === 'ios' ? 0.65 : 0.75};
   border-radius: 5px;
   align-items: center;
   justify-content: space-between;
@@ -33,7 +33,7 @@ export const Product = styled.View`
 `;
 
 export const ProductImage = styled.Image`
-  width: ${width * 0.75}px;
+  width: ${Platform.OS === 'ios' ? width * 0.75 : width * 0.6}px;
   height: ${height * 0.3}px;
 `;
 

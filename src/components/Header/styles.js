@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { darken } from 'polished';
 
@@ -25,21 +25,21 @@ export const Logo = styled.Image.attrs({
   resizeMode: 'cover',
 })`
   width: ${width * 0.5}px;
-  height: ${height * 0.03}px;
+  height: ${Platform.OS === 'ios' ? height * 0.03 : height * 0.04}px;
 `;
 
 export const BasketContainer = styled.TouchableOpacity`
   flex: 1;
   width: ${height * 0.03}px;
-  height: ${height * 0.03}px;
+  height: ${Platform.OS === 'ios' ? height * 0.03 : height * 0.04}px;
   align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: center;
 `;
 
 export const BasketIcon = styled(Icon).attrs({
   name: 'shopping-basket',
   color: '#FFF',
-  size: height * 0.03,
+  size: Platform.OS === 'ios' ? height * 0.03 : height * 0.04,
 })``;
 
 export const ItemCount = styled.Text`

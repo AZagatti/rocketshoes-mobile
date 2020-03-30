@@ -8,20 +8,20 @@
   An e-commerce app for buying shoes.
 </h4>
 <p align="center">
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/azagatti/challenge07-gostack10?color=FCD12A&style=plastic">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/azagatti/rocketshoes-mobile?color=FCD12A&style=plasticc">
 
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/azagatti/challenge07-gostack10?color=FCD12A&style=plastic">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/azagatti/rocketshoes-mobile?color=FCD12A&style=plastic">
 
-  <img alt="Repo size" src="https://img.shields.io/github/repo-size/azagatti/challenge07-gostack10?color=fcd12a&style=plastic">
+  <img alt="Repo size" src="https://img.shields.io/github/repo-size/azagatti/rocketshoes-mobile?color=FCD12A&style=plastic">
 
-  <a href="https://github.com/AZagatti/challenge07-gostack10/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/azagatti/challenge07-gostack10?style=plastic">
+  <a href="https://github.com/AZagatti/rocketshoes-mobile/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/azagatti/rocketshoes-mobile?style=plastic">
   </a>
 
-  <img alt="License" src="https://img.shields.io/github/license/AZagatti/challenge07-gostack10?style=plastic">
+  <img alt="License" src="https://img.shields.io/github/license/AZagatti/rocketshoes-mobile?style=plastic">
 
-  <a href="https://app.codacy.com/manual/AZagatti/challenge07-gostack10/dashboard">
-    <img alt="Code Quality" src="https://img.shields.io/codacy/grade/7f45d968c6f14e0f965557c58f8e082d?style=plastic">
+  <a href="https://app.codacy.com/manual/AZagatti/rocketshoes-mobile/dashboard">
+    <img alt="Code Quality" src="https://img.shields.io/codacy/grade/716b8fa849ab4d93b14770f67c63d942?style=plastic">
   </a>
 </p>
 
@@ -69,7 +69,7 @@ This is a project developed for challenge 07 'Flux Architecture' of the [Rockets
 
 ## 📝 License
 
-This project is under the MIT license. See the [LICENSE](https://github.com/AZagatti/challenge07-gostack10/blob/master/LICENSE.md) for more information.
+This project is under the MIT license. See the [LICENSE](https://github.com/AZagatti/rocketshoes-mobile/blob/master/LICENSE.md) for more information.
 
 ---
 

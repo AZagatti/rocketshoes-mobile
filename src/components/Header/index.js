@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import PropTypes from 'prop-types';
 
@@ -12,7 +12,9 @@ import {
   ItemCount,
 } from './styles';
 
-function Header({ navigation, cartSize }) {
+function Header({ navigation }) {
+  const cartSize = useSelector(state => state.cart.length);
+
   return (
     <SafeContainer>
       <Container>
@@ -36,11 +38,6 @@ Header.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }),
-  cartSize: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = state => ({
-  cartSize: state.cart.length,
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;

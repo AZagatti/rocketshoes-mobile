@@ -67,6 +67,23 @@ This is a project developed for challenge 07 'Flux Architecture' of the [Rockets
 
 </div>
 
+## 🚀 Getting started
+
+First of all you need to have `node` and `yarn`(or `npm`) installed on your machine.
+
+_If you decide to use npm don't forget to delete yarn.lock in folders_
+
+Then you can clone the repository.
+
+`git clone https://github.com/azagatti/rocketshoes-mobile`
+
+Starting the application with Expo.
+
+1. `cd mobile`
+2. `yarn` or `npm install`
+3. `yarn android/ios` or `npm run android/ios` 
+_If your Metro Bundler does not started run `yarn start` or `npm run start`_
+
 ## 📝 License
 
 This project is under the MIT license. See the [LICENSE](https://github.com/AZagatti/rocketshoes-mobile/blob/master/LICENSE.md) for more information.
